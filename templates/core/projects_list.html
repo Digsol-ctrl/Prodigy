@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects - Mechanical Prodigy Engineering</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D32F2F;
+            --primary-white: #FFFFFF;
+            --primary-black: #212121;
+            --light-gray: #f5f5f5;
+            --dark-gray: #424242;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-black);
+            overflow-x: hidden;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: var(--primary-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-black);
+        }
+        
+        .navbar-brand span {
+            color: var(--primary-red);
+        }
+        
+        .nav-link {
+            color: var(--primary-black);
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-red);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-red);
+            border-color: var(--primary-red);
+            padding: 10px 25px;
+            font-weight: 600;
+            border-radius: 2px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #B71C1C;
+            border-color: #B71C1C;
+        }
+        
+        .btn-outline-primary {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            padding: 10px 25px;
+            font-weight: 600;
+            border-radius: 2px;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-red);
+            color: var(--primary-white);
+        }
+        
+        /* Projects Header */
+        .projects-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3') no-repeat center center/cover;
+            color: var(--primary-white);
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+        
+        .projects-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Projects Section */
+        .projects-section {
+            padding: 80px 0;
+        }
+        
+        .project-filters {
+            background: var(--primary-white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .project-card {
+            background: var(--primary-white);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .project-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.05);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(211, 47, 47, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-info {
+            padding: 25px;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-black);
+        }
+        
+        .project-location {
+            color: var(--primary-red);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .project-duration {
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .project-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .project-actions .btn {
+            flex: 1;
+        }
+        
+        /* Pagination */
+        .pagination {
+            margin-top: 40px;
+            justify-content: center;
+        }
+        
+        .page-link {
+            color: var(--primary-red);
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-red);
+            border-color: var(--primary-red);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--primary-black);
+            color: var(--primary-white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-red);
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-white);
+            margin-left: 5px;
+        }
+        
+        .social-icons {
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: var(--primary-white);
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary-red);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-red);
+            color: var(--primary-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            bottom: 30px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .projects-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .project-actions {
+                flex-direction: column;
+            }
+            
+            .project-img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'core:homepage' %}">Mechanical <span>Prodigy</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:homepage' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products:product_list' %}">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'core:projects_list' %}">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <a href="#" class="btn btn-primary ms-lg-3">Get Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Header -->
+    <section class="projects-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1>Our Completed Projects</h1>
+                    <p>Showcasing our expertise in metal fabrication and engineering solutions across Zimbabwe</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="mb-0">
+                                    {% if projects %}
+                                        Showing {{ projects.start_index }} - {{ projects.end_index }} of {{ projects.paginator.count }} projects
+                                    {% else %}
+                                        No projects found
+                                    {% endif %}
+                                </p>
+                                <!-- <div class="d-flex">
+                                    <button class="btn btn-sm btn-outline-secondary me-2 active"><i class="fas fa-th"></i></button>
+                                    <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-list"></i></button>
+                                </div> -->
+                            </div>
+                        </div>
+                        
+                        <!-- Django Projects Loop -->
+                        {% if projects %}
+                            {% for project in projects %}
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="project-card">
+                                    <div class="project-img">
+                                        {% if project.image %}
+                                            <img src="{{ project.image.url }}" alt="{{ project.name }}">
+                                        {% else %}
+                                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3" alt="{{ project.name }}">
+                                        {% endif %}
+                                        <div class="project-overlay">
+                                            <h5 class="text-white text-center">View Project Details</h5>
+                                        </div>
+                                    </div>
+                                    <div class="project-info">
+                                        <h3 class="project-title">{{ project.name }}</h3>
+                                        <div class="project-location">
+                                            <i class="fas fa-map-marker-alt me-2"></i>{{ project.location }}
+                                        </div>
+                                        <div class="project-duration">
+                                            <i class="fas fa-clock me-2"></i>{{ project.duration }}
+                                        </div>
+                                
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="col-12 text-center py-5">
+                                <h3>No projects found</h3>
+                            
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Django Pagination -->
+                    {% if is_paginated %}
+                    <nav aria-label="Project pagination">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?q={{ request.GET.q }}&location={{ request.GET.location }}&duration={{ request.GET.duration }}&page={{ page_obj.previous_page_number }}">Previous</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            {% endif %}
+                            
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                                {% else %}
+                                <li class="page-item"><a class="page-link" href="?q={{ request.GET.q }}&location={{ request.GET.location }}&duration={{ request.GET.duration }}&page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?q={{ request.GET.q }}&location={{ request.GET.location }}&duration={{ request.GET.duration }}&page={{ page_obj.next_page_number }}">Next</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-title">Mechanical Prodigy Engineering</h4>
+                    <p>Your trusted partner for quality metal fabrication, welding, and 
+                        engineering solutions in Zimbabwe.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'core:homepage' %}">Home</a></li>
+                        <li><a href="{% url 'products:product_list' %}">Shop</a></li>
+                        <li><a href="{% url 'core:projects_list' %}">Projects</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h4 class="footer-title">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Structural Steel Work</a></li>
+                        <li><a href="#">Mining Equipment</a></li>
+                        <li><a href="#">Sliding Gates</a></li>
+                        <li><a href="#">Window Frames</a></li>
+                        <li><a href="#">Fuel Tanks</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h4 class="footer-title">Contact Info</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Metalwork Road, Harare</li>
+                        <li><i class="fas fa-phone me-2"></i> +263 123 456 789</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@mechanicalprodigy.co.zw</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <p>&copy; 2025 Mechanical Prodigy Engineering. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Back to top button
+        $(document).ready(function(){
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 100) {
+                    $('.back-to-top').addClass('active');
+                } else {
+                    $('.back-to-top').removeClass('active');
+                }
+            });
+            
+            $('.back-to-top').click(function(){
+                $('html, body').animate({scrollTop : 0}, 800);
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>
