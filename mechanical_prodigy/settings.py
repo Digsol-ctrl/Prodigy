@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-$-q#+nsp9p)y62v84e8i!w%*jwkp&h0!xtr6)kgh5_ih8*3yv)
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'yourusername.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'DigitsDigital.pythonanywhere.com', 'www.mechanicalprodigy.co.zw', 'mechanicalprodigy.co.zw']
 
 
 # Application definition
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    
+
     'core',
     'products',
 ]
@@ -82,12 +82,25 @@ WSGI_APPLICATION = 'mechanical_prodigy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
+if DEBUG:
+    DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'DigitsDigital$default',
+        'USER': 'DigitsDigital',
+        'PASSWORD': 'MySql3041',
+        'HOST': 'DigitsDigital.mysql.pythonanywhere-services.com',
     }
 }
+else:
+
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
